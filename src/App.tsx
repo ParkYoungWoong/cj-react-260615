@@ -2,12 +2,19 @@ import { useState } from 'react'
 import Button from '@/components/Button'
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(false)
   return (
     <>
-      <Button loading={true}>증가</Button>
-      <Button>감소</Button>
-      <Button>취소</Button>
-      <Button>저장</Button>
+      <Button
+        loading={isLoading}
+        onClick={() => {
+          setIsLoading(true)
+          setTimeout(() => {
+            setIsLoading(false)
+          }, 3000)
+        }}>
+        저장
+      </Button>
     </>
   )
 }
