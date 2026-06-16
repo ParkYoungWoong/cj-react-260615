@@ -11,6 +11,7 @@ export default function App() {
 
   return (
     <>
+      <h1 onClick={() => increase()}>{count}</h1>
       <Button
         loading={isLoading}
         onClick={() => {
