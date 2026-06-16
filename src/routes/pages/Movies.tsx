@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
+import { Link } from 'react-router'
 
 export interface ResponseValue {
   Response: 'True' | 'False'
@@ -43,7 +44,11 @@ export default function Movies() {
       </div>
       <ul>
         {movies.map(movie => {
-          return <li key={movie.imdbID}>{movie.Title}</li>
+          return (
+            <li key={movie.imdbID}>
+              <Link to={`/movies/${movie.imdbID}`}>{movie.Title}</Link>
+            </li>
+          )
         })}
       </ul>
     </>
