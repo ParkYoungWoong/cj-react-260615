@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router'
 import Home from './pages/Home'
 import About from './pages/About'
 import SignIn from './pages/SignIn'
+import Movies from './pages/Movies'
 
 // http://localhost:5173/
 // http://localhost:5173/movies/tt1234567
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: '/signin', // http://localhost:5173/signin
     element: <SignIn />
+  },
+  {
+    path: '/movies',
+    element: <Movies />
   }
 ])
 

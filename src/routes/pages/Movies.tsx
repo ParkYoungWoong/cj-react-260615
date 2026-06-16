@@ -1,14 +1,29 @@
 import axios from 'axios'
 import { useState } from 'react'
 
+export interface ResponseValue {
+  Response: 'True' | 'False'
+  Search?: Movie[]
+  totalResults?: `${number}`
+  Error?: string
+}
+export interface Movie {
+  Title: string
+  Year: string
+  imdbID: string
+  Type: string
+  Poster: string
+}
+
 export default function Movies() {
   const [searchText, setSearchText] = useState('')
+  const [movies, setMovies] = useState<Movie[]>([])
 
   async function fetchMovies() {
-    const { data } = await axios.get(
+    const { data } = await axios.get<ResponseValue>(
       `https://omdbapi.com?apikey=7035c60c&s=${searchText}`
     )
-    console.log(data)
+    setMovies(data.Search || [])
   }
 
   return (
@@ -19,9 +34,20 @@ export default function Movies() {
           type="text"
           value={searchText}
           onChange={event => setSearchText(event.target.value)}
+          onKeyDown={event => {
+            if (event.nativeEvent.isComposing) return
+            if (event.key === 'Enter') fetchMovies()
+          }}
         />
-        <button>검색</button>
+        <button onClick={() => fetchMovies()}>검색</button>
       </div>
+      <ul>
+        {movies.map(movie => {
+          return <li key={movie.imdbID}>{movie.Title}</li>
+        })}
+      </ul>
     </>
   )
 }
+
+// 36:30
