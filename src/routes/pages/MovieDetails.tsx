@@ -54,15 +54,21 @@ export default function MovieDetails() {
       {movie && (
         <>
           <h1>{movie.Title}</h1>
+          <img
+            src={`https://img.omdbapi.com?apikey=7035c60c&i=${movieId}&h=1500`}
+            alt={movie.Title}
+          />
           <p>{movie.Plot}</p>
           <p>{movie.Actors}</p>
           <p>{movie.Director}</p>
           <p>{movie.Writer}</p>
-          <p>{movie.Language}</p>
-          <p>{movie.Country}</p>
-          <p>{movie.Awards}</p>
-          <p>{movie.Poster}</p>
-          <p>{movie.Metascore}</p>
+          {movie.Ratings.map(rating => {
+            return (
+              <p key={rating.Source}>
+                {rating.Source} - {rating.Value}
+              </p>
+            )
+          })}
         </>
       )}
     </>

@@ -27,7 +27,8 @@ const router = createBrowserRouter([
         element: <SignIn />
       },
       {
-        path: '/movies',
+        path: '/movies', // http://localhost:5173/movies
+        loader: () => {},
         element: <Movies />
       },
       {
