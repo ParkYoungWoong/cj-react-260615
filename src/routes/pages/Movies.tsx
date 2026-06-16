@@ -1,32 +1,11 @@
-import axios from 'axios'
-import { useState } from 'react'
 import { Link } from 'react-router'
-
-export interface ResponseValue {
-  Response: 'True' | 'False'
-  Search?: Movie[]
-  totalResults?: `${number}`
-  Error?: string
-}
-export interface Movie {
-  Title: string
-  Year: string
-  imdbID: string
-  Type: string
-  Poster: string
-}
+import { useMovieStore } from '@/stores/movie'
 
 export default function Movies() {
-  const [searchText, setSearchText] = useState('')
-  const [movies, setMovies] = useState<Movie[]>([])
-
-  async function fetchMovies() {
-    const { data } = await axios.get<ResponseValue>(
-      `https://omdbapi.com?apikey=7035c60c&s=${searchText}`
-    )
-    setMovies(data.Search || [])
-  }
-
+  const searchText = useMovieStore(s => s.searchText)
+  const setSearchText = useMovieStore(s => s.setSearchText)
+  const fetchMovies = useMovieStore(s => s.fetchMovies)
+  const movies = useMovieStore(s => s.movies)
   return (
     <>
       <h1>Movies Page!</h1>

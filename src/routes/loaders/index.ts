@@ -4,16 +4,14 @@ interface Context {
   request: Request
 }
 
-// 17:02
-
 export function requiresAuth({ request }: Context) {
-  // request.url // 'http://localhost:5173/movies' // '/movies'
+  // request.url // 'http://localhost:5173/movies/a/b/c/d?a=1&b=2&c=3' // '/movies'
   const url = new URL(request.url)
   const accessToken = localStorage.getItem('accessToken')
   if (accessToken) {
     return true // 통과!
   }
-  return redirect(`/signin?callbackUrl=${url.pathname}`)
+  return redirect(`/signin?callbackUrl=${url.pathname + url.search}`)
   // '/signin?callbackUrl=/movies'
 }
 

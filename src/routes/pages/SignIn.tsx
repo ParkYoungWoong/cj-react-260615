@@ -1,17 +1,20 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 
 export default function SignIn() {
   const [id, setId] = useState('')
   const [pw, setPw] = useState('')
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl')
+  // '/movies'
 
   function signIn() {
     if (id.trim() && pw.trim()) {
       // 로그인 성공!
       const accessToken = 'username=HEROPY&email=thesecon@gmail.com&expires=300'
       localStorage.setItem('accessToken', accessToken)
-      navigate('/')
+      navigate(callbackUrl || '/')
     }
   }
 
