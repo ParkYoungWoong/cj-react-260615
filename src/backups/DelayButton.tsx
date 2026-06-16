@@ -1,14 +1,8 @@
 import { useState } from 'react'
 import Button from '@/components/Button'
-import { useCountStore } from '@/stores/count'
-
-// 10:01
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false)
-  const count = useCountStore(s => s.count)
-  const increase = useCountStore(s => s.increase)
-
   return (
     <>
       <Button
